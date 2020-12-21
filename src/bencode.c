@@ -194,7 +194,7 @@ void print_bencode(bencode_obj_t *b, int indent) {
             printf("String: %s\n", b->data.string);
             break;
         case BList: {
-            printf("[\n");
+            printf("List: [\n");
             list_t *l = b->data.list;
             const unsigned char *node;
 
@@ -209,8 +209,9 @@ void print_bencode(bencode_obj_t *b, int indent) {
             const char *key;
             const unsigned char *value;
 
-            printf("{\n");
+            printf("Dict: {\n");
             FOREACH_KEY_AND_VAL(key, value, b->data.dictionary) {
+                print_indent(indent + 2);
                 printf("Key: %s\n", key);
                 print_bencode(*((bencode_obj_t**)value), indent + 2);
             }
