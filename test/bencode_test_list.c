@@ -65,6 +65,7 @@ static void test_list_dict(void **state) {
     bencode_obj_t *b3 = transfer_to_bencode_obj(dict_get(d, "hello"));
     int got = b3->data.integer;
     assert_int_equal(10, got);
+    print_bencode(b, 0);
 }
 
 

@@ -57,6 +57,7 @@ static void test_dict_val_dict(void **state) {
     dict_t *d = b->data.dictionary;
     bencode_obj_t *b2 = transfer_to_bencode_obj(dict_get(d, "hello"));
     assert_true(b2->type == BDict);
+    print_bencode(b, 0);
 }
 
 static void test_dict_info(void **state) {
