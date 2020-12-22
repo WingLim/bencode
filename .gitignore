@@ -1,2 +1,3 @@
 .DS_Store
 cmake-build-debug
+.cc_token
