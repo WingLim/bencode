@@ -15,6 +15,8 @@ static void test_parse_string(void **state) {
 
     char *got = b->data.string;
     assert_string_equal("hello", got);
+
+    bencode_obj_free(b);
 }
 
 int run_all_tests() {

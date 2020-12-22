@@ -7,6 +7,11 @@
 
 const char *endptr;
 
+static int teardown(void  **state) {
+    bencode_obj_free(*state);
+    return 0;
+}
+
 static void test_list_int(void **state) {
     const char *raw = "li10ee";
 
@@ -19,6 +24,8 @@ static void test_list_int(void **state) {
 
     long got = b2->data.integer;
     assert_int_equal(10, got);
+
+    *state = b;
 }
 
 static void test_list_string(void **state) {
@@ -33,6 +40,8 @@ static void test_list_string(void **state) {
 
     char *got = b2->data.string;
     assert_string_equal("hello", got);
+
+    *state = b;
 }
 
 static void test_list_list(void **state) {
@@ -49,6 +58,8 @@ static void test_list_list(void **state) {
     bencode_obj_t *b3 = transfer_to_bencode_obj(l2->head->data);
     int got = b3->data.integer;
     assert_int_equal(10, got);
+
+    *state = b;
 }
 
 static void test_list_dict(void **state) {
@@ -66,15 +77,17 @@ static void test_list_dict(void **state) {
     int got = b3->data.integer;
     assert_int_equal(10, got);
     print_bencode(b, 0);
+
+    *state = b;
 }
 
 
 int run_all_tests() {
     const struct CMUnitTest tests[] = {
-            cmocka_unit_test(test_list_int),
-            cmocka_unit_test(test_list_string),
-            cmocka_unit_test(test_list_list),
-            cmocka_unit_test(test_list_dict),
+            cmocka_unit_test_teardown(test_list_int, teardown),
+            cmocka_unit_test_teardown(test_list_string, teardown),
+            cmocka_unit_test_teardown(test_list_list, teardown),
+            cmocka_unit_test_teardown(test_list_dict, teardown),
     };
 
     return cmocka_run_group_tests(tests, NULL, NULL);

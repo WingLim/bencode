@@ -15,6 +15,8 @@ static void test_parse_int(void **state) {
 
     long got = b->data.integer;
     assert_int_equal(10, got);
+
+    bencode_obj_free(b);
 }
 
 int run_all_tests() {
