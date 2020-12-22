@@ -3,6 +3,13 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 project(bencode)
 
+# Compiler settings
+
+option(CODE_COVERAGE "Enable coverage reporting" OFF)
+if (CODE_COVERAGE AND CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")
+    include(CodeCov)
+endif ()
+
 option(IWYU "Run include-what-you-use with the compiler" OFF)
 if (IWYU)
     find_program(IWYU_COMMAND NAMES include-what-you-use iwyu)
@@ -13,6 +20,8 @@ if (IWYU)
 endif ()
 
 enable_testing()
+
+# Main library
 
 add_library(bencode
         src/bencode.c
@@ -26,5 +35,7 @@ target_include_directories(bencode
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+# Subdirectoriess
 
 add_subdirectory(test)
