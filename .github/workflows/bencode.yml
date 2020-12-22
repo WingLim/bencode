@@ -1,4 +1,4 @@
-name: Bencode test
+name: build
 on:
   push:
     branhes: [ main ]
