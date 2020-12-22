@@ -5,7 +5,7 @@ BUILD_DIR ?= cmake-build-$(shell echo $(BUILD_TYPE) | tr '[:upper:]' '[:lower:]'
 CODECOV ?= OFF
 IWYU ?= ON
 
-TEST_SUITES = bencode_test_int bencode_test_string bencode_test_list bencode_test_dict
+TEST_SUITES = bencode_test_int bencode_test_string bencode_test_list bencode_test_dict list_tests dict_tests
 
 clean:
 	@rm -rf $(BUILD_DIR)
