@@ -28,9 +28,10 @@ typedef struct {
 } SHA1_CTX;
 
 /*********************** FUNCTION DECLARATIONS **********************/
-void sha1_init(SHA1_CTX *ctx);
-void sha1_update(SHA1_CTX *ctx, const BYTE data[], size_t len);
-void sha1_final(SHA1_CTX *ctx, BYTE hash[]);
-void sha1_compute( const char *input, size_t len, unsigned char output[20] );
+void    sha1_init(SHA1_CTX *ctx);
+void    sha1_update(SHA1_CTX *ctx, const BYTE data[], size_t len);
+void    sha1_final(SHA1_CTX *ctx, BYTE hash[]);
+void    sha1_compute( const char *input, size_t len, BYTE output[20] );
+void    sha1_format(BYTE hash[20], char result[41]);
 
 #endif   // SHA1_H

@@ -12,6 +12,7 @@
 /*************************** HEADER FILES ***************************/
 #include <stdlib.h>
 #include <memory.h>
+#include <stdio.h>
 #include "sha1.h"
 
 /****************************** MACROS ******************************/
@@ -148,10 +149,18 @@ void sha1_final(SHA1_CTX *ctx, BYTE hash[])
     }
 }
 
-void sha1_compute( const char *input, size_t len, unsigned char output[20] ) {
+void sha1_compute(const char *input, size_t len, BYTE output[20]) {
     SHA1_CTX ctx;
 
     sha1_init(&ctx);
-    sha1_update(&ctx, input, len);
+    for (size_t i = 0; i < len; ++i) {
+        sha1_update(&ctx, (const unsigned char*)input + i, 1);
+    }
     sha1_final(&ctx, output);
+}
+
+void sha1_format(BYTE hash[20], char result[41]) {
+    for (int offset = 0; offset < 20; ++offset) {
+        sprintf((result + (2*offset)), "%02x", hash[offset]&0xff);
+    }
 }
