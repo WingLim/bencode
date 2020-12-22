@@ -63,7 +63,7 @@ static void test_list_list(void **state) {
 }
 
 static void test_list_dict(void **state) {
-    const char *raw = "ld5:helloi10eee";
+    const char *raw = "ld5:hello5:worldee";
 
     bencode_obj_t *b = parse_bencode(raw, &endptr);
     assert_true(b->type == BList);
@@ -74,8 +74,8 @@ static void test_list_dict(void **state) {
 
     dict_t *d = b2->data.dictionary;
     bencode_obj_t *b3 = transfer_to_bencode_obj(dict_get(d, "hello"));
-    int got = b3->data.integer;
-    assert_int_equal(10, got);
+    char *got = b3->data.string;
+    assert_string_equal("world", got);
     print_bencode(b, 0);
 
     *state = b;
