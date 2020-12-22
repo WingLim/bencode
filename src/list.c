@@ -54,6 +54,7 @@ int list_add(list_t *list, unsigned char *data, size_t size) {
     }
 
     list->tail->next = new_node;
+    list->size++;
 }
 int list_remove(list_t *list, unsigned char *data) {
     if (!list->head) {
