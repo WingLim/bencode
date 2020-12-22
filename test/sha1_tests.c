@@ -43,12 +43,29 @@ static void test_sha1_4(void **state) {
     assert_sha1(string, want);
 }
 
+static void test_sha1_5(void **state) {
+    const char *string = "abcdefghbcdefghicdefghijdefghijkefghijklfghijklmghijklmnhijklmnoaaaaaa";
+    char want[] = "3e38291a0a90fcdeb682ff32ef8f010815ba20e1";
+    BYTE buf[SHA1_BLOCK_SIZE];
+    char got[41];
+
+    SHA1_CTX ctx;
+
+    sha1_init(&ctx);
+    sha1_update(&ctx, (const BYTE *) string, strlen(string));
+    sha1_final(&ctx, buf);
+
+    sha1_format(buf, got);
+    assert_true( strncmp(got, want, 40) == 0);
+}
+
 int run_all_tests() {
     const struct CMUnitTest tests[] = {
             cmocka_unit_test(test_sha1_1),
             cmocka_unit_test(test_sha1_2),
             cmocka_unit_test(test_sha1_3),
             cmocka_unit_test(test_sha1_4),
+            cmocka_unit_test(test_sha1_5),
     };
 
     return cmocka_run_group_tests(tests, NULL, NULL);
