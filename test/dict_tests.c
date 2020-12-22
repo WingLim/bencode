@@ -64,16 +64,16 @@ static void test_remove(void **state) {
     dict_free(d);
 }
 
-static void test_remove_chain_last(void **state) {
+static void test_remove_chain_first(void **state) {
     dict_t *d;
     d = dict_init(1);
     const char *key = "hello";
     int value = 1;
     int value2 = 2;
-    dict_add(d, "hello", (unsigned char*)&value, sizeof(value));
-    dict_add(d, "world", (unsigned char*)&value2, sizeof(value2));
+    dict_add(d, "a", (unsigned char*)&value, sizeof(value));
+    dict_add(d, "b", (unsigned char*)&value2, sizeof(value2));
 
-    dict_remove(d, "world");
+    dict_remove(d, "a");
     assert_int_equal(1, d->size);
 
     dict_free(d);
@@ -129,7 +129,7 @@ int run_all_tests() {
             cmocka_unit_test(test_add),
             cmocka_unit_test(test_add_same_key),
             cmocka_unit_test(test_remove),
-            cmocka_unit_test(test_remove_chain_last),
+            cmocka_unit_test(test_remove_chain_first),
             cmocka_unit_test(test_remove_chain_mid),
             cmocka_unit_test(test_foreach),
     };
