@@ -6,7 +6,7 @@ CODECOV ?= OFF
 IWYU ?= ON
 
 TEST_SUITES = bencode_test_int bencode_test_string bencode_test_list bencode_test_dict
-TEST_SUITES += list_tests dict_tests
+TEST_SUITES += list_tests dict_tests sha1_tests
 
 clean:
 	@rm -rf $(BUILD_DIR)
