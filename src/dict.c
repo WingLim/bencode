@@ -83,8 +83,8 @@ int dict_add(dict_t *dict, const char *key, unsigned char *value, size_t size) {
             dict->table[hash] = entry;
             dict->size--;
         } else {
-            while (entry->next) {
-                curr = entry->next;
+            while (curr->next) {
+                curr = curr->next;
             }
             curr->next = entry;
         }
