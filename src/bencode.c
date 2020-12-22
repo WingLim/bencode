@@ -188,7 +188,7 @@ void print_bencode(bencode_obj_t *b, int indent) {
     print_indent(indent);
     switch (b->type) {
         case BInt:
-            printf("Int: %ld\n", b->data.integer);
+            printf("Int: %lld\n", b->data.integer);
             break;
         case BString:
             printf("String: %s\n", b->data.string);
