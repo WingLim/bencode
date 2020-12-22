@@ -17,7 +17,22 @@ static void test_init(void **state) {
     dict_free(d);
 }
 
-static void test_add(void **state) {
+static void test_add(void  **state) {
+    dict_t *d;
+    d = dict_init(1);
+
+    int value1 = 1;
+    dict_add(d, "value1", (unsigned char*)&value1, sizeof(value1));
+
+    int value2 = 2;
+    dict_add(d, "value2", (unsigned char*)&value2, sizeof(value2));
+
+    assert_int_equal(2, d->size);
+
+    dict_free(d);
+}
+
+static void test_add_same_key(void **state) {
     dict_t *d;
     d = dict_init(1);
 
@@ -80,6 +95,7 @@ int run_all_tests() {
     const struct CMUnitTest tests[] = {
             cmocka_unit_test(test_init),
             cmocka_unit_test(test_add),
+            cmocka_unit_test(test_add_same_key),
             cmocka_unit_test(test_remove),
             cmocka_unit_test(test_foreach),
     };

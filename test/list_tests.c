@@ -21,9 +21,13 @@ static void test_add(void **state) {
 
     int want = 100;
     list_add(l, (unsigned char*)&want, sizeof(want));
+    assert_true(list_contains(l, (unsigned char*)&want));
 
-    bool status = list_contains(l, (unsigned char*)&want);
-    assert_true(status);
+    char *want2 = "test";
+    list_add(l, (unsigned char*)&want2, sizeof(want2));
+    assert_true(list_contains(l, (unsigned char *)&want2));
+
+    assert_int_equal(2, l->size);
 
     list_free(l);
 }
@@ -34,6 +38,10 @@ static void test_remove(void **state) {
     int want = 100;
     list_add(l, (unsigned char*)&want, sizeof(want));
 
+    char *want2 = "test";
+    list_add(l, (unsigned char*)&want2, sizeof(want2));
+
+    list_remove(l, (unsigned char*)&want2);
     list_remove(l, (unsigned char*)&want);
 
     bool status = list_contains(l, (unsigned char*)&want);
