@@ -1,7 +1,8 @@
 name: build
 on:
   push:
-    branhes: [ main ]
+    branches:
+      - "main"
     paths-ignore:
       - "README.md"
 
