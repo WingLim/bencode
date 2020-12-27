@@ -10,7 +10,7 @@ The format is based on [Keep a Changelog][Keep a Changelog] and this project adh
 
 ## [Released]
 
-## [v1.0.0] - 2020-12-27
+## [1.0.0] - 2020-12-27
 
 ### Added
 
@@ -21,8 +21,8 @@ The format is based on [Keep a Changelog][Keep a Changelog] and this project adh
 
 ### Fixed
 
-- Iterate dict in one chain(93a78dd)
-- Auto plus list size(f1c1f86)
+- Iterate dict in one chain(93a78dd75eb3f2327974d7cb36637a82276760bb)
+- Auto plus list size(f1c1f862373e77e961f856ed9d465bafbfbaa171)
 
 ---
 
@@ -33,4 +33,4 @@ The format is based on [Keep a Changelog][Keep a Changelog] and this project adh
 <!-- Versions -->
 [Unreleased]: https://github.com/WingLim/bencode/compare/v1.0.0...HEAD
 [Released]: https://github.com/WingLim/bencode/releases
-[v1.0.0]: https://github.com/WingLim/bencode/releases/v1.0.0
+[1.0.0]: https://github.com/Author/Repository/releases/v1.0.0
