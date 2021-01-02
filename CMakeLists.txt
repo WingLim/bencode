@@ -38,4 +38,7 @@ target_include_directories(bencode
 
 # Subdirectoriess
 
-add_subdirectory(test)
+option(UNIT_TEST "Enable unit test" OFF)
+if (UNIT_TEST)
+    add_subdirectory(test)
+endif (UNIT_TEST)
