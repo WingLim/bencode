@@ -10,6 +10,12 @@ The format is based on [Keep a Changelog][Keep a Changelog] and this project adh
 
 ## [Released]
 
+## [1.0.1] - 2021-01-02
+
+### Added
+
+- `UNIT_TEST` Option for cmake
+
 ## [1.0.0] - 2020-12-27
 
 ### Added
@@ -34,3 +40,4 @@ The format is based on [Keep a Changelog][Keep a Changelog] and this project adh
 [Unreleased]: https://github.com/WingLim/bencode/compare/v1.0.0...HEAD
 [Released]: https://github.com/WingLim/bencode/releases
 [1.0.0]: https://github.com/Author/Repository/releases/v1.0.0
+[1.0.1]: https://github.com/Author/Repository/releases/v1.0.1
