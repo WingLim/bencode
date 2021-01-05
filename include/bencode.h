@@ -20,7 +20,7 @@ typedef struct bencode_obj {
     btype_t type;
     union {
         int64_t integer;
-        char *string;
+        unsigned char *string;
         list_t *list;
         dict_t *dictionary;
     } data;
