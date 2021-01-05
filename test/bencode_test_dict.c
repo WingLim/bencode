@@ -40,7 +40,7 @@ static void test_dict_val_string(void **state) {
     bencode_obj_t *b2 = transfer_to_bencode_obj(dict_get(d, "hello"));
     assert_true(b2->type == BString);
 
-    char *got = b2->data.string;
+    char *got = b2->data.string->str;
     assert_string_equal("world", got);
 
     *state = b;

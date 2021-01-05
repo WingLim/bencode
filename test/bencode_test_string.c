@@ -13,7 +13,7 @@ static void test_parse_string(void **state) {
     bencode_obj_t *b = parse_bencode(raw, &endptr);
     assert_true(b->type == BString);
 
-    char *got = b->data.string;
+    char *got = b->data.string->str;
     assert_string_equal("hello", got);
 
     bencode_obj_free(b);

@@ -7,6 +7,7 @@
 
 #include "dict.h"
 #include "list.h"
+#include "byte_str.h"
 #include "sha1.h"
 
 typedef enum {
@@ -20,7 +21,7 @@ typedef struct bencode_obj {
     btype_t type;
     union {
         int64_t integer;
-        unsigned char *string;
+        byte_str_t *string;
         list_t *list;
         dict_t *dictionary;
     } data;
@@ -29,7 +30,7 @@ typedef struct bencode_obj {
 
 bencode_obj_t   *parse_bencode(const char *benc, const char **endptr);
 void            bencode_obj_free(bencode_obj_t *b);
-bencode_obj_t   *transfer_to_bencode_obj(unsigned char value[]);
+bencode_obj_t   *transfer_to_bencode_obj(const unsigned char value[]);
 void            print_bencode(bencode_obj_t *b, int indent);
 
 #endif //BENCODE_BENCODE_H

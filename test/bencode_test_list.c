@@ -38,7 +38,7 @@ static void test_list_string(void **state) {
     bencode_obj_t *b2 = transfer_to_bencode_obj(l->head->data);
     assert_true(b2->type == BString);
 
-    char *got = b2->data.string;
+    char *got = b2->data.string->str;
     assert_string_equal("hello", got);
 
     *state = b;
@@ -74,7 +74,7 @@ static void test_list_dict(void **state) {
 
     dict_t *d = b2->data.dictionary;
     bencode_obj_t *b3 = transfer_to_bencode_obj(dict_get(d, "hello"));
-    char *got = b3->data.string;
+    char *got = b3->data.string->str;
     assert_string_equal("world", got);
     print_bencode(b, 0);
 

@@ -24,7 +24,7 @@ void bencode_obj_free(bencode_obj_t *b) {
             free(b);
             break;
         case BString:
-            free(b->data.string);
+            byte_str_free(b->data.string);
             free(b);
             break;
         case BList: {
@@ -83,17 +83,13 @@ static bencode_obj_t *parse_string(const char *benc, const char **endptr) {
     assert(**endptr == ':');
     (*endptr)++;
 
-    char *s = malloc(sizeof(char)*(len + 1));
-    memcpy(s, *endptr, len);
-    s[len] = '\0';
-    (*endptr) += len;
-
     b = new_bencode_obj();
     assert(b);
 
     b->type = BString;
-    b->data.string = s;
+    b->data.string = byte_str_new(len, *endptr);
 
+    (*endptr) += len;
     return b;
 }
 
@@ -146,13 +142,13 @@ static bencode_obj_t *parse_dict(const char *benc, const char **endptr) {
         assert(value);
         assert(*endptr > benc);
 
-        if (!strcmp(key->data.string, "info")) {
+        if (!strcmp((char*)key->data.string->str, "info")) {
             assert(benc[0] == 'd');
             assert((*endptr)[-1] == 'e');
             sha1_compute(benc, *endptr - benc, value->sha1);
         }
 
-        dict_add(b->data.dictionary, (char*)key->data.string,
+        dict_add(b->data.dictionary, (char*)key->data.string->str,
                  (unsigned char*)&value, sizeof(value));
 
         bencode_obj_free(key);
@@ -180,7 +176,7 @@ void print_indent(int indent) {
     }
 }
 
-bencode_obj_t *transfer_to_bencode_obj(unsigned char value[]) {
+bencode_obj_t *transfer_to_bencode_obj(const unsigned char value[]) {
     return *((bencode_obj_t**) value);
 }
 
@@ -191,7 +187,7 @@ void print_bencode(bencode_obj_t *b, int indent) {
             printf("Int: %lld\n", b->data.integer);
             break;
         case BString:
-            printf("String: %s\n", b->data.string);
+            printf("String: %s\n", b->data.string->str);
             break;
         case BList: {
             printf("List: [\n");

@@ -27,7 +27,7 @@ add_library(bencode
         src/bencode.c
         src/list.c
         src/dict.c
-        src/sha1.c)
+        src/sha1.c src/byte_str.c)
 
 target_include_directories(bencode
         PUBLIC
